@@ -6,7 +6,7 @@
 /*   By: dmilan <dmilan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:45:52 by dmilan            #+#    #+#             */
-/*   Updated: 2020/12/23 18:01:39 by dmilan           ###   ########.fr       */
+/*   Updated: 2021/01/22 18:16:25 by dmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <stdio.h>
+# include <stdlib.h>
+# include <fcntl.h>
 
 int			ft_strcmp(const char *s1, const char *s2);
 char		*ft_strcpy(char *dst, const char *src);
