@@ -6,12 +6,14 @@
 /*   By: dmilan <dmilan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:57:29 by dmilan            #+#    #+#             */
-/*   Updated: 2021/01/22 18:30:47 by dmilan           ###   ########.fr       */
+/*   Updated: 2021/01/23 11:07:31 by dmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
+#include <errno.h>
 
+extern int errno;
 
 void	test_strlen(void)
 {
@@ -30,9 +32,10 @@ void	test_strdup(void)
 	printf("**********************************\n");
 	printf("*  ft_strdup                     *\n");
 	printf("**********************************\n");
-	
+
+	printf("Test \"hello\" string\n");
 	printf("Orig: %s\n", strdup("hello"));
-	printf("Mine: %s\n", ft_strdup("hello"));
+	printf("Mine: %s\n\n", ft_strdup("hello"));
 }
 
 void	test_strcpy(void)
@@ -48,12 +51,11 @@ void	test_strcpy(void)
 	dest2 = malloc(10);
 	src = malloc(10);
 	src = strcpy(src, "hello,yo");
-	printf("%s\n", strcpy(dest, src));
-	printf("%s\n", ft_strcpy(dest2, src));
+	printf("Orig: %s\n", strcpy(dest, src));
+	printf("Mine: %s\n\n", ft_strcpy(dest2, src));
 	free(dest);
 	free(dest2);
 	free(src);
-	
 }
 
 void	test_strcmp(void)
@@ -62,6 +64,7 @@ void	test_strcmp(void)
 	printf("*  ft_strcmp                     *\n");
 	printf("**********************************\n");
 
+	printf("Test: %s and %s$\nOrig: %d\nMine: %d\n\n", "a", "a", strcmp("a", "a"), ft_strcmp("a", "a"));
 	printf("Test: %s and %s$\nOrig: %d\nMine: %d\n\n", "a", "ab", strcmp("a", "ab"), ft_strcmp("a", "ab"));
 	printf("Test: %s and %s$\nOrig: %d\nMine: %d\n\n", "", "12345", strcmp("", "12345"), ft_strcmp("", "12345"));
 	printf("Test: %s and %s$\nOrig: %d\nMine: %d\n\n", "1234", "", strcmp("1234", ""), ft_strcmp("1234", ""));
@@ -80,11 +83,17 @@ void	test_read(void)
 	buf = malloc(10);
 	printf("Reading 10 bytes from Makefile\n");
 	read(fd, buf, 10);
-	printf("%s\n", buf);
+	printf("Orig: %s\n", buf);
 	ft_read(fd, buf, 10);
-	printf("%s\n", buf);
+	printf("Mine: %s\n\n", buf);
 	free(buf);
 	close(fd);
+
+	printf("Reading from unexisting fd\n");
+	printf("Orig: %zd errno: %d\n", read(-23, buf, 10), errno);
+	errno = 0;
+	printf("Mine: %zd errno: %d\n", ft_read(-23, buf, 10), errno);
+	write(1, "\n", 1);
 }
 
 void	test_write(void)
@@ -94,8 +103,8 @@ void	test_write(void)
 	printf("**********************************\n");
 	
 	printf("Test: usual input\n");
-	write(1, "Orig: function;\n", 17);
-	ft_write(1, "Mine: function;\n", 17);
+	write(1, "Orig: test text\n", 17);
+	ft_write(1, "Mine: test text\n", 17);
 	write(1, "\n", 1);
 	
 	printf("Test: zero width\n");
@@ -104,19 +113,26 @@ void	test_write(void)
 	write(1, "\n", 1);
 	
 	printf("Test: fd < 0\n");
-	printf("%zd\n", write(-1, "Test", 4));
-	printf("%zd\n", ft_write(-1, "Test", 4));
+	printf("Orig: %zd errno: %d\n", write(-1, "Test", 4), errno);
+	errno = 0;
+	printf("Mine: %zd errno: %d\n\n", ft_write(-1, "Test", 4), errno);
+	
+	printf("Test: negative width\n");
+	printf("Orig: %zd errno: %d\n", write(1, "Test", -1), errno);
+	errno = 0;
+	printf("Mine: %zd errno: %d\n", ft_write(1, "Test", -1), errno);
+	// printf("%zd\n", ft_write(-1, "Test", 4));
 	write(1, "\n", 1);
 	
 }
 
 int		main(void)
 {
-	// test_strlen(); // done
-	// test_strcpy(); // done
+	test_strlen();
+	test_strcpy();
 	test_write();
-	// test_strdup();
-	// test_read(); // done
-	// test_strcmp();
+	test_strdup();
+	test_read();
+	test_strcmp();
 	return (0);
 }

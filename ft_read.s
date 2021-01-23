@@ -1,6 +1,6 @@
 section .text
-global _ft_read  ; set entry point
-				 ; why start with _? 
+global _ft_read
+extern ___error
 SYS_READ equ 0x2000003
 
 ; rdi - 1 arg
@@ -14,7 +14,12 @@ _ft_read:
 	jmp exit
 
 error:
+	push r8
+	mov r8, rax				; after syscall rax contains error code
+	call ___error			; returns pointer to errno variable
+	mov [rax], r8
 	mov rax, -1
+	pop r8
 	ret
 
 exit:

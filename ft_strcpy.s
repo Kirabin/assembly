@@ -9,7 +9,7 @@ _ft_strcpy:
 	xor rax, rax
 	.loop:
 		mov cl, byte [rsi + rax]
-		mov byte [rdi + rax], cl  ; should i push?
+		mov byte [rdi + rax], cl
 		cmp cl, 0
 		je exit
 		inc rax

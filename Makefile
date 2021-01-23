@@ -6,13 +6,13 @@
 #    By: dmilan <dmilan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/23 16:37:25 by dmilan            #+#    #+#              #
-#    Updated: 2021/01/22 12:23:17 by dmilan           ###   ########.fr        #
+#    Updated: 2021/01/23 09:27:44 by dmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= libasm.a
 HEADER		= libasm.h
-FLAGS		= -Wall -Wextra -Werror
+# FLAGS		= -Wall -Wextra -Werror
 SRC			= ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s
 OBJ			= $(SRC:.s=.o)
 
