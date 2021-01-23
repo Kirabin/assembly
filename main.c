@@ -6,7 +6,7 @@
 /*   By: dmilan <dmilan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:57:29 by dmilan            #+#    #+#             */
-/*   Updated: 2021/01/23 11:07:31 by dmilan           ###   ########.fr       */
+/*   Updated: 2021/01/23 12:44:20 by dmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	test_strlen(void)
 	
 	printf("Test: %s$\nOrig: %zu\nMine: %zu\n\n", "1234", strlen("1234"), ft_strlen("1234"));
 	printf("Test: %s$\nOrig: %zu\nMine: %zu\n\n", "", strlen(""), ft_strlen(""));
-	// Don't need check for NULL
 	printf("Test: %s$\nOrig: %zu\nMine: %zu\n\n", "  ", strlen("  "), ft_strlen("  "));
 }
 
@@ -65,7 +64,7 @@ void	test_strcmp(void)
 	printf("**********************************\n");
 
 	printf("Test: %s and %s$\nOrig: %d\nMine: %d\n\n", "a", "a", strcmp("a", "a"), ft_strcmp("a", "a"));
-	printf("Test: %s and %s$\nOrig: %d\nMine: %d\n\n", "a", "ab", strcmp("a", "ab"), ft_strcmp("a", "ab"));
+	printf("Test: %s and %s$\nOrig: %d\nMine: %d\n\n", "Lorem ipsum dolor st amet, consectetur adipiscing", "Lodsfsdfasdf", strcmp("Lorem ipsum dolor st amet, consectetur adipiscing", "Lodsfsdfasdf"), ft_strcmp("Lorem ipsum dolor st amet, consectetur adipiscing", "Lodsfsdfasdf"));
 	printf("Test: %s and %s$\nOrig: %d\nMine: %d\n\n", "", "12345", strcmp("", "12345"), ft_strcmp("", "12345"));
 	printf("Test: %s and %s$\nOrig: %d\nMine: %d\n\n", "1234", "", strcmp("1234", ""), ft_strcmp("1234", ""));
 	printf("Test: %s and %s$\nOrig: %d\nMine: %d\n\n", "ab", "a", strcmp("ab", "a"), ft_strcmp("ab", "a"));
@@ -121,9 +120,7 @@ void	test_write(void)
 	printf("Orig: %zd errno: %d\n", write(1, "Test", -1), errno);
 	errno = 0;
 	printf("Mine: %zd errno: %d\n", ft_write(1, "Test", -1), errno);
-	// printf("%zd\n", ft_write(-1, "Test", 4));
 	write(1, "\n", 1);
-	
 }
 
 int		main(void)

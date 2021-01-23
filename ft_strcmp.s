@@ -16,6 +16,9 @@ _ft_strcmp:
 		je _bigger
 		cmp cl, dl
 		je .loop
+		cmp cl, dl
+		jl _lower
+		jg _bigger
 
 _lower:
 	cmp dl, 0

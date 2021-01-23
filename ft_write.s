@@ -8,12 +8,6 @@ SYS_WRITE equ 0x2000004
 ; rdx - 3 arg
 ; should handle errors
 _ft_write:
-	; cmp rdi, 0
-	; jl error
-
-	; cmp rdx, 0
-	; jle error
-
 	mov rax, SYS_WRITE
 	syscall					; call system call which contains in rax
 	jc error				; write will set carry flag in case of an error
